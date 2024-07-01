@@ -1,4 +1,10 @@
-import { Client as Bot, Intents, TextChannel } from 'discord.js';
+import {
+	Client as Bot,
+	Intents,
+	MessageEmbed,
+	TextChannel,
+	type AnyChannel,
+} from 'discord.js';
 import { Client as SelfBot } from 'discord.js-selfbot-v13';
 import config from '../config.json';
 import consola from 'consola';
@@ -21,6 +27,7 @@ selfbot.on('messageDelete', async (msg) => {
 	consola.log('Detected - Check 1');
 	if (msg.author?.bot) return;
 	consola.log('Check 2');
+	consola.log(msg.content);
 	if (msg.content) consola.log('Content: yes => ' + msg.content);
 	if (!msg.content || (msg.content && !(msg.content.length > 0))) return;
 	consola.log(
@@ -28,10 +35,26 @@ selfbot.on('messageDelete', async (msg) => {
 	);
 	//prettier-ignore
 	const channel = bot.channels.cache.get(config.guild.loggingChannel) as TextChannel
+	/*
 	await channel.send(
 		`Deleted message: ${msg.guild?.name}(${msg.guild?.id}) - ${msg.author?.username}(displayname: ${msg.author?.displayName}) said ${msg.content}\nhttps://discord.com/channels/${msg.guildId}/${msg.channelId}/${msg.id}`
 	);
-	// consola.info(msg);
+	*/
+	//prettier-ignore
+	const embed = new MessageEmbed()
+		.setTitle(`[DELETE] ${msg.author?.username}(${msg.author?.id})`)
+		.setURL(`https://discord.com/channels/${msg.guildId}/${msg.channelId}/${msg.id}`)
+		.addFields(
+			{name: "チャンネル", value: `${msg.channel}`},
+			{name: "内容", value: msg.content}
+		)
+		.setColor('GREY')
+		.setFooter(`on ${msg.guild?.name}(${msg.guildId})`)
+		.setTimestamp()
+
+	await channel.send({
+		embeds: [embed],
+	});
 });
 
 process.on('SIGTERM', shutdown);
@@ -42,6 +65,7 @@ async function shutdown() {
 	bot.destroy();
 	selfbot.destroy();
 	consola.success('Goodbye!');
+	process.exit(0);
 }
 
 process.on('uncaughtException', function (e) {
