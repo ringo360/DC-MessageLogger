@@ -1,10 +1,4 @@
-import {
-	Client as Bot,
-	Intents,
-	MessageEmbed,
-	TextChannel,
-	type AnyChannel,
-} from 'discord.js';
+import { Client as Bot, Intents, MessageEmbed, TextChannel } from 'discord.js';
 import { Client as SelfBot } from 'discord.js-selfbot-v13';
 import config from '../config.json';
 import consola from 'consola';
@@ -35,11 +29,6 @@ selfbot.on('messageDelete', async (msg) => {
 	);
 	//prettier-ignore
 	const channel = bot.channels.cache.get(config.guild.loggingChannel) as TextChannel
-	/*
-	await channel.send(
-		`Deleted message: ${msg.guild?.name}(${msg.guild?.id}) - ${msg.author?.username}(displayname: ${msg.author?.displayName}) said ${msg.content}\nhttps://discord.com/channels/${msg.guildId}/${msg.channelId}/${msg.id}`
-	);
-	*/
 	//prettier-ignore
 	const embed = new MessageEmbed()
 		.setTitle(`[DELETE] ${msg.author?.username}(${msg.author?.id})`)
