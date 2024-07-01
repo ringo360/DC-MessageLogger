@@ -17,12 +17,7 @@ selfbot.on('ready', async () => {
 });
 
 selfbot.on('messageDelete', async (msg) => {
-	// console.log(msg);
-	consola.log('Detected - Check 1');
 	if (msg.author?.bot) return;
-	consola.log('Check 2');
-	consola.log(msg.content);
-	if (msg.content) consola.log('Content: yes => ' + msg.content);
 	if (!msg.content || (msg.content && !(msg.content.length > 0))) return;
 	consola.log(
 		`Deleted message: ${msg.guild?.name}(${msg.guild?.id}) - ${msg.author?.username}(displayname: ${msg.author?.displayName}) said ${msg.content}`
