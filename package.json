@@ -1,0 +1,22 @@
+{
+	"name": "dc-messagelogger",
+	"module": "src/index.ts",
+	"type": "module",
+	"devDependencies": {
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	},
+	"license": "AGPL-3.0-only",
+	"dependencies": {
+		"consola": "^3.2.3",
+		"discord.js": "v13.17.1",
+		"discord.js-selfbot-v13": "^3.1.4",
+		"picocolors": "^1.0.1",
+		"tsx": "^4.16.0"
+	},
+	"scripts": {
+		"start": "tsx ./src/index.ts"
+	}
+}

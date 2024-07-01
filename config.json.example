@@ -1,0 +1,11 @@
+{
+	"tokens": {
+		"bot": "",
+		"selfbot": ""
+	},
+	"guild": {
+		"id": "",
+		"loggingChannel": "",
+		"statusChanel": ""
+	}
+}
